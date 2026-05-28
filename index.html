@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Questionnaire — Lettre d’information En Scène</title>
+  <style>
+    :root {
+      --fond: #f8f1e9;
+      --papier: #fffaf4;
+      --texte: #2f2926;
+      --muted: #6f625b;
+      --accent: #8e4d3f;
+      --accent-2: #d7a36f;
+      --ligne: #e7d8c9;
+      --ombre: rgba(60, 42, 31, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: linear-gradient(180deg, #f3e3d2 0%, var(--fond) 45%, #fffaf4 100%);
+      color: var(--texte);
+      line-height: 1.6;
+    }
+
+    header {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 42px 20px 28px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border: 1px solid var(--accent-2);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(255, 250, 244, 0.75);
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height: 1.08;
+      font-weight: 500;
+      color: #3a2822;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    form {
+      background: var(--papier);
+      border: 1px solid var(--ligne);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px var(--ombre);
+      padding: clamp(22px, 4vw, 46px);
+    }
+
+    .notice {
+      background: #f3e7da;
+      border-left: 5px solid var(--accent);
+      padding: 16px 18px;
+      border-radius: 16px;
+      color: #544741;
+      margin-bottom: 30px;
+    }
+
+    section {
+      padding: 28px 0;
+      border-top: 1px solid var(--ligne);
+    }
+
+    section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 3vw, 1.9rem);
+      margin: 0 0 22px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .question {
+      margin: 22px 0 28px;
+    }
+
+    label.question-title,
+    .question-title {
+      display: block;
+      font-weight: bold;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: #342a26;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-top: -4px;
+      margin-bottom: 10px;
+    }
+
+    .options {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+
+    .options label {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      background: #fffdf9;
+      border: 1px solid #eaded1;
+      border-radius: 14px;
+      padding: 9px 11px;
+      cursor: pointer;
+    }
+
+    .options label:hover {
+      border-color: var(--accent-2);
+      background: #fff8f0;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-top: 5px;
+      accent-color: var(--accent);
+    }
+
+    textarea,
+    input[type="text"] {
+      width: 100%;
+      border: 1px solid #ddcdbf;
+      border-radius: 16px;
+      background: #fffdf9;
+      padding: 12px 14px;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: var(--texte);
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: 2px solid rgba(142, 77, 63, 0.2);
+      border-color: var(--accent);
+    }
+
+    .three-words {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .submit-zone {
+      text-align: center;
+      padding-top: 24px;
+    }
+
+    button {
+      border: none;
+      background: var(--accent);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 999px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(142, 77, 63, 0.22);
+    }
+
+    button:hover {
+      background: #753e33;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 14px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 0 20px 45px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      .three-words {
+        grid-template-columns: 1fr;
+      }
+
+      form {
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge">Programme En Scène</div>
+    <h1>Questionnaire — Lettre d’information</h1>
+    <p class="intro">Ce questionnaire s’adresse aux personnes qui reçoivent des nouvelles du programme En Scène : ancien·nes participant·es, bénévoles, partenaires, financeurs, donateur·rices, soutiens ou personnes intéressées par le projet.</p>
+  </header>
+
+  <main>
+    <form action="https://formspree.io/f/xeedngoq" method="POST">
+      <input type="hidden" name="_subject" value="Nouveau questionnaire lettre d’information En Scène" />
+
+      <div class="notice">
+        Vos réponses nous aideront à faire le bilan du programme et à mieux comprendre ce que la lettre d’information permet de transmettre.
+      </div>
+
+      <section>
+        <h2>1. Votre lien avec En Scène</h2>
+
+        <div class="question">
+          <div class="question-title">1. Quel est votre lien avec le programme En Scène ?</div>
+          <div class="hint">Plusieurs réponses possibles.</div>
+          <div class="options">
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Ancien·ne participant·e" /> Ancien·ne participant·e</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Participant·e de cette année" /> Participant·e de cette année</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Bénévole du Secours populaire" /> Bénévole du Secours populaire</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Membre / salarié·e du Secours populaire" /> Membre / salarié·e du Secours populaire</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Partenaire" /> Partenaire</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Financeur ou institution" /> Financeur ou institution</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Donateur·rice / soutien financier, notamment via HelloAsso" /> Donateur·rice / soutien financier, notamment via HelloAsso</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Proche d’un·e participant·e" /> Proche d’un·e participant·e</label>
+            <label><input type="checkbox" name="1. Lien avec En Scène" value="Personne intéressée par le projet" /> Personne intéressée par le projet</label>
+          </div>
+          <input type="text" name="1. Autre lien" placeholder="Autre lien avec En Scène..." />
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Votre perception du programme</h2>
+
+        <div class="question">
+          <label class="question-title" for="representation">2. En quelques mots, que représente En Scène pour vous ?</label>
+          <textarea id="representation" name="2. Ce que représente En Scène"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="question-title">3. À travers les informations que vous recevez, le projet vous semble-t-il clair ?</div>
+          <div class="options">
+            <label><input type="radio" name="3. Clarté du projet" value="Oui, très clair" /> Oui, très clair</label>
+            <label><input type="radio" name="3. Clarté du projet" value="Plutôt clair" /> Plutôt clair</label>
+            <label><input type="radio" name="3. Clarté du projet" value="Pas toujours clair" /> Pas toujours clair</label>
+            <label><input type="radio" name="3. Clarté du projet" value="Non" /> Non</label>
+            <label><input type="radio" name="3. Clarté du projet" value="Je ne sais pas" /> Je ne sais pas</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-title" for="precieux">4. Qu’est-ce qui vous paraît le plus précieux dans ce programme ?</label>
+          <textarea id="precieux" name="4. Ce qui paraît le plus précieux"></textarea>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. La lettre d’information</h2>
+
+        <div class="question">
+          <div class="question-title">5. Lisez-vous la lettre d’information En Scène ?</div>
+          <div class="options">
+            <label><input type="radio" name="5. Lecture de la lettre d’information" value="Oui, régulièrement" /> Oui, régulièrement</label>
+            <label><input type="radio" name="5. Lecture de la lettre d’information" value="Oui, de temps en temps" /> Oui, de temps en temps</label>
+            <label><input type="radio" name="5. Lecture de la lettre d’information" value="Je la parcours rapidement" /> Je la parcours rapidement</label>
+            <label><input type="radio" name="5. Lecture de la lettre d’information" value="Rarement" /> Rarement</label>
+            <label><input type="radio" name="5. Lecture de la lettre d’information" value="Je ne la lis pas vraiment" /> Je ne la lis pas vraiment</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-title" for="appreciation-lettre">6. Qu’est-ce que vous appréciez dans cette lettre d’information ?</label>
+          <textarea id="appreciation-lettre" name="6. Ce qui est apprécié dans la lettre d’information"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="question-title">7. Qu’aimeriez-vous y trouver davantage ?</div>
+          <div class="hint">Plusieurs réponses possibles.</div>
+          <div class="options">
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des nouvelles des participant·es" /> Des nouvelles des participant·es</label>
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des photos" /> Des photos</label>
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des témoignages" /> Des témoignages</label>
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des dates à retenir" /> Des dates à retenir</label>
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des coulisses du processus de création" /> Des coulisses du processus de création</label>
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des appels à soutien ou à contribution" /> Des appels à soutien ou à contribution</label>
+            <label><input type="checkbox" name="7. Ce qui serait souhaité davantage" value="Des bilans plus synthétiques" /> Des bilans plus synthétiques</label>
+          </div>
+          <input type="text" name="7. Autre souhait" placeholder="Autre..." />
+        </div>
+      </section>
+
+      <section>
+        <h2>4. Soutien et visibilité</h2>
+
+        <div class="question">
+          <div class="question-title">8. Avez-vous déjà soutenu En Scène d’une manière ou d’une autre ?</div>
+          <div class="hint">Plusieurs réponses possibles.</div>
+          <div class="options">
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Oui, par un don financier, notamment via HelloAsso" /> Oui, par un don financier, notamment via HelloAsso</label>
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Oui, par du bénévolat" /> Oui, par du bénévolat</label>
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Oui, en relayant l’information" /> Oui, en relayant l’information</label>
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Oui, en venant à une répétition publique ou à une restitution publique" /> Oui, en venant à une répétition publique ou à une restitution publique</label>
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Oui, en parlant du projet autour de moi" /> Oui, en parlant du projet autour de moi</label>
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Oui, par un soutien institutionnel ou partenarial" /> Oui, par un soutien institutionnel ou partenarial</label>
+            <label><input type="checkbox" name="8. Soutien à En Scène" value="Non, pas encore" /> Non, pas encore</label>
+          </div>
+          <input type="text" name="8. Autre soutien" placeholder="Autre forme de soutien..." />
+        </div>
+
+        <div class="question">
+          <label class="question-title" for="envie-soutien">9. Qu’est-ce qui pourrait vous donner envie de soutenir ou relayer davantage le programme ?</label>
+          <textarea id="envie-soutien" name="9. Ce qui donnerait envie de soutenir ou relayer"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="question-title">10. Avez-vous déjà assisté à une répétition publique ou à une restitution publique d’En Scène ?</div>
+          <div class="options">
+            <label><input type="radio" name="10. Présence répétition ou restitution" value="Oui, à une répétition publique" /> Oui, à une répétition publique</label>
+            <label><input type="radio" name="10. Présence répétition ou restitution" value="Oui, à une restitution publique cette année" /> Oui, à une restitution publique cette année</label>
+            <label><input type="radio" name="10. Présence répétition ou restitution" value="Oui, à une restitution publique une année précédente" /> Oui, à une restitution publique une année précédente</label>
+            <label><input type="radio" name="10. Présence répétition ou restitution" value="Oui, à plusieurs répétitions publiques ou restitutions publiques" /> Oui, à plusieurs répétitions publiques ou restitutions publiques</label>
+            <label><input type="radio" name="10. Présence répétition ou restitution" value="Non, pas encore" /> Non, pas encore</label>
+          </div>
+          <textarea name="10. Ce qui a marqué" placeholder="Si oui, qu’est-ce qui vous a marqué·e ?"></textarea>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. Regard global</h2>
+
+        <div class="question">
+          <label class="question-title" for="points-forts">11. Quels sont selon vous les points forts d’En Scène ?</label>
+          <textarea id="points-forts" name="11. Points forts d’En Scène"></textarea>
+        </div>
+
+        <div class="question">
+          <label class="question-title" for="amelioration">12. Y a-t-il quelque chose qui pourrait être mieux expliqué, amélioré ou rendu plus visible ?</label>
+          <textarea id="amelioration" name="12. À mieux expliquer améliorer ou rendre visible"></textarea>
+        </div>
+
+        <div class="question">
+          <div class="question-title">13. Accepteriez-vous que certains éléments de votre retour soient cités dans le bilan du programme ?</div>
+          <div class="options">
+            <label><input type="radio" name="13. Autorisation de citation" value="Oui, avec mon prénom ou ma fonction" /> Oui, avec mon prénom ou ma fonction</label>
+            <label><input type="radio" name="13. Autorisation de citation" value="Oui, de manière anonyme" /> Oui, de manière anonyme</label>
+            <label><input type="radio" name="13. Autorisation de citation" value="Non" /> Non</label>
+            <label><input type="radio" name="13. Autorisation de citation" value="Je souhaite être recontacté·e avant toute citation" /> Je souhaite être recontacté·e avant toute citation</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="question-title">14. Si vous deviez résumer En Scène en trois mots, lesquels choisiriez-vous ?</div>
+          <div class="three-words">
+            <input type="text" name="14. Mot 1" placeholder="Mot 1" />
+            <input type="text" name="14. Mot 2" placeholder="Mot 2" />
+            <input type="text" name="14. Mot 3" placeholder="Mot 3" />
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="question-title" for="mot-fin">15. Y a-t-il autre chose que vous aimeriez partager ?</label>
+          <textarea id="mot-fin" name="15. Autre chose à partager"></textarea>
+        </div>
+      </section>
+
+      <div class="submit-zone">
+        <button type="submit">Envoyer mes réponses</button>
+        <p class="small">Après l’envoi, vos réponses seront transmises via Formspree.</p>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    Programme En Scène — questionnaire lettre d’information
+  </footer>
+</body>
+</html>
